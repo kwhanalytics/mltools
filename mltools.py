@@ -129,5 +129,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--config_path", help="Specify where the config.yaml file lives.",
                         type=str, required=True)
+    parser.add_argument("--iterations", help="Specify the number of iterations you want to run the MLPipeline",
+                        type=str, default=3, required=False)
     args = vars(parser.parse_args())
     main(config_path=args['config_path'])
