@@ -1,0 +1,41 @@
+# Example config.yaml file that can be used as a template for configuring machine learning frameworks
+name: rd_ml_pipeline
+dataset:
+    data_file:
+        filepath: example/data/example.csv
+        use_cols:
+            - id
+            - num_production_years
+            - mount_type
+            - cell_material
+            - annual_ghi
+            - yoy_rd
+        outcome: yoy_rd
+        primary_key: id
+        categorical_cols:
+            - mount_type
+            - cell_material
+    cleaning:
+        - keep_first_duplicate
+        - drop_outcome_outliers
+        - drop_missing_values
+        - one_hot_categorical_variables
+    scaling:
+        outcome_scaler: RobustScaler
+    splitting:
+        split_method: train_test_split
+        split_params:
+            test_size: 0.1
+            random_state: 42
+model:
+    name: RandomForestRegressor
+    model_params:
+        n_estimators: 100
+baseline:
+    baseline_type: model
+    baseline_value: LinearRegression
+report:
+    report_dir: example/reports
+    metrics:
+        - r2
+        - rmse
